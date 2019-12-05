@@ -4,7 +4,7 @@ from sqlalchemy import create_engine, MetaData, Column, INTEGER, VARCHAR
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import Session
 
-engine = create_engine(r'''sqlite:///'''+sqllite_base_path+'''''', echo=True)
+engine = create_engine(r'''sqlite:///'''+sqllite_base_path+'''''', echo=False)
 Base = declarative_base()
 metadata = MetaData()
 session = Session(bind=engine)
@@ -17,4 +17,4 @@ class Files(Base):
     file_catalog = Column(VARCHAR(50))
 
 
-#Base.metadata.create_all(engine)
+Base.metadata.create_all(engine)
