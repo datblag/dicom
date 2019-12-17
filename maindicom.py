@@ -14,7 +14,8 @@ def check_process(prm_process_name):
             is_run = 1
             break
     if is_run == 1:
-        logging.info(prm_process_name+' run')
+        #logging.info(prm_process_name+' run')
+        pass
     else:
         logging.error(prm_process_name+' not run')
     return is_run
@@ -32,17 +33,19 @@ def main():
                             query = session.query(Files).filter(Files.file_catalog == file_catalog.strip()).filter(
                                 Files.file_name == filename.strip())
                             if len(query.all()) == 0:
+                                logging.warning(filename)
                                 if not os.path.exists(os.path.join(dir_for_copy, file_catalog.strip())):
                                     os.makedirs(os.path.join(dir_for_copy, file_catalog.strip()))
 
                                 file = Files()
                                 file.file_name = filename.strip()
                                 file.file_catalog = file_catalog.strip()
+                                shutil.copy(os.path.join(dir_for_monitoring, file_catalog.strip(), filename.strip()),
+                                            os.path.join(dir_for_copy, file_catalog.strip(), filename.strip()))
                                 session.add(file)
                                 session.commit()
                                 logging.warning([file_catalog, filename, 'скопирован'])
-                                shutil.copy(os.path.join(dir_for_monitoring, file_catalog.strip(), filename.strip()),
-                                            os.path.join(dir_for_copy, file_catalog.strip(), filename.strip()))
+                    #logging.warning('scan complete')
         except Exception as e:
             logging.error(e)
 
