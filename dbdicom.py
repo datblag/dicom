@@ -9,7 +9,6 @@ Base = declarative_base()
 metadata = MetaData()
 session = Session(bind=engine)
 
-
 class Files(Base):
     __tablename__ = 'files'
     file_id = Column(INTEGER, primary_key=True)
