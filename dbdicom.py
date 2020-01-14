@@ -1,5 +1,4 @@
 from config import sqllite_base_path
-
 from sqlalchemy import create_engine, MetaData, Column, INTEGER, VARCHAR
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import Session
